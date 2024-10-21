@@ -1,0 +1,24 @@
+created:
+    - database/factories/CategoryFactory.php
+    - database/factories/CommentFactory.php
+    - database/factories/AdminFactory.php
+    - database/factories/PostFactory.php
+    - app/Models/Category.php
+    - app/Models/Comment.php
+    - app/Models/Admin.php
+    - app/Models/Post.php
+    - database/seeders/CategorySeeder.php
+    - database/seeders/PostSeeder.php
+    - database/seeders/AdminSeeder.php
+updated:
+    - database/migrations/2024_10_21_125156_create_categories_table.php
+    - database/migrations/2024_10_21_125157_create_comments_table.php
+    - database/migrations/2024_10_21_125158_create_admins_table.php
+    - database/migrations/2024_10_21_125159_create_posts_table.php
+    - database/migrations/2024_10_21_125200_create_category_post_table.php
+models:
+    User: { name: string, email: string, email_verified_at: 'timestamp nullable', password: string, remember_token: 'string:100 nullable' }
+    Category: { name: string, relationships: { hasMany: Post }, softdeletes: softDeletes }
+    Comment: { comment: text, post_id: 'id foreign', user_id: 'id foreign', relationships: { belongsTo: 'User, Post' }, softdeletes: softDeletes }
+    Admin: { name: string, username: 'string unique', password: string, softdeletes: softDeletes }
+    Post: { admin_id: 'id foreign', title: string, content: text, image: string, yt_embed: 'string nullable', views: 'unsignedInteger default:0', softdeletes: softDeletes, relationships: { belongsTo: Admin, belongsToMany: Category, hasMany: Comment } }
