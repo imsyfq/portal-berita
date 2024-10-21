@@ -1,0 +1,35 @@
+models:
+  Category:
+    name: string
+    relationships:
+      hasMany: Post
+    softDeletes: true
+
+  Comment:
+    comment: text
+    post_id: id foreign
+    user_id: id foreign
+    relationships:
+      belongsTo: User, Post
+    softDeletes: true
+
+  Admin:
+    name: string
+    username: string unique
+    password: string
+    softDeletes: true
+
+  Post:
+    admin_id: id foreign
+    title: string
+    content: text
+    image: string
+    yt_embed: string nullable
+    views: unsignedInteger default:0
+    softDeletes: true
+    relationships:
+      belongsTo: Admin
+      belongsToMany: Category
+      hasMany: Comment
+
+seeders: Category, Post, Admin
