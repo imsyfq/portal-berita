@@ -21,12 +21,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        Admin::create([
-            'name' => 'Admin',
-            'username' => 'admin',
-            'password' => bcrypt('admin'),
-        ]);
-
         $this->call([
             AdminSeeder::class,
             PostSeeder::class,
