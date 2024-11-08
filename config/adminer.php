@@ -45,7 +45,7 @@ return [
     |       'middleware' => ['auth', 'adminer']
     |
     */
-    'middleware' => ['web', 'adminer-access'],
+    'middleware' => null,
 
     /*
     |--------------------------------------------------------------------------
