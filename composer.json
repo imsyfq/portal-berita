@@ -13,6 +13,7 @@
     "laravel/framework": "^11.9",
     "laravel/tinker": "^2.9",
     "laravel/ui": "^4.5",
+    "onecentlin/laravel-adminer": "^7.0",
     "yajra/laravel-datatables-oracle": "^11"
   },
   "require-dev": {
