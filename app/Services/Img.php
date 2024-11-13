@@ -40,7 +40,7 @@ class Img
 
     /**
      * Uploads an image to the storage public path.
-     * All uplaoded file will encoded to png.
+     * All uploaded files will be encoded to png
      *
      * @param  string|null  $path
      * @param  bool  $default_naming
