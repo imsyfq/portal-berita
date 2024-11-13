@@ -21,4 +21,4 @@ models:
     Category: { name: string, relationships: { hasMany: Post }, softdeletes: softDeletes }
     Comment: { comment: text, post_id: 'id foreign', user_id: 'id foreign', relationships: { belongsTo: 'User, Post' }, softdeletes: softDeletes }
     Admin: { name: string, username: 'string unique', password: string, softdeletes: softDeletes }
-    Post: { admin_id: 'id foreign', title: string, content: text, image: string, yt_embed: 'string nullable', views: 'unsignedInteger default:0', softdeletes: softDeletes, relationships: { belongsTo: Admin, belongsToMany: Category, hasMany: Comment } }
+    Post: { admin_id: 'id foreign', title: string, slug: 'string unique', content: text, image: string, yt_embed: 'string nullable', views: 'unsignedInteger default:0', softdeletes: softDeletes, relationships: { belongsTo: Admin, belongsToMany: Category, hasMany: Comment } }

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
@@ -21,6 +22,7 @@ class Post extends Model
     protected $fillable = [
         'admin_id',
         'title',
+        'slug',
         'content',
         'image',
         'yt_embed',
@@ -51,5 +53,16 @@ class Post extends Model
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public static function generateSlug($title): string
+    {
+        $slug = Str::slug(Str::words($title, 15, ''));
+        $exists = self::where('slug', $slug)->exists();
+        if ($exists) {
+            $slug .= '-'.rand(1, 999);
+        }
+
+        return $slug;
     }
 }

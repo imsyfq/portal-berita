@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\PostController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,5 +20,6 @@ Route::prefix('admin')->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
         Route::resource('category', CategoryController::class)->except('show');
+        Route::resource('post', PostController::class)->except('show');
     });
 });

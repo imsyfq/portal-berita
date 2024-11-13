@@ -17,6 +17,7 @@ class SidebarMenu
     {
         return [
             ...CategoryMenu::getMenu(),
+            ...PostMenu::getMenu(),
         ];
     }
 
