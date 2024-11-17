@@ -123,7 +123,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-
     // Custom
     'company_url' => env('APP_URL', 'http://localhost'),
 ];
