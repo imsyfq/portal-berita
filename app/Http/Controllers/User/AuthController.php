@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    public function loginForm()
+    {
+        return view('public.auth.login');
+    }
+
+    public function registerForm()
+    {
+        return view('public.auth.register');
+    }
+
     public function register(Request $request)
     {
         $request->validate([
@@ -25,25 +35,29 @@ class AuthController extends Controller
 
         Auth::guard('web')->login($user);
 
-        return redirect()->url('/');
+        return redirect('/');
     }
 
     public function login(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'email' => 'required|string|email',
-            'password' => 'required|string|min:6',
+            'password' => 'required|string',
         ]);
 
-        // should i bcrypt the password here?
-        // test soon.
-        $validated = $request->validated();
         if (! Auth::guard('web')->attempt($validated)) {
             return redirect()->back()->withErrors([ // idk you could do that:v
-                'email' => 'Invalid email or password',
+                'message' => 'Email atau password salah.',
             ]);
         }
 
-        return redirect()->url('/');
+        return redirect('/');
+    }
+
+    public function logout()
+    {
+        Auth::guard('web')->logout();
+
+        return redirect('/');
     }
 }
