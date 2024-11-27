@@ -2,11 +2,12 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\User\AuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('front-end.index');
+    return view('public.index');
 });
 
 Route::prefix('admin')->group(function () {
@@ -21,5 +22,19 @@ Route::prefix('admin')->group(function () {
 
         Route::resource('category', CategoryController::class)->except('show');
         Route::resource('post', PostController::class)->except('show');
+    });
+});
+
+Route::prefix('user')->group(function () {
+    Route::middleware('guest:web')->group(function () {
+        Route::get('/login', [AuthController::class, 'loginForm']);
+        Route::post('/login', [AuthController::class, 'login'])->name('user.login');
+
+        Route::get('/register', [AuthController::class, 'registerForm']);
+        Route::post('/register', [AuthController::class, 'register'])->name('user.register');
+    });
+
+    Route::middleware('auth:web')->group(function () {
+        Route::get('/logout', [AuthController::class, 'logout']);
     });
 });
