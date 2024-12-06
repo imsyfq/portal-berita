@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Admin;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class PostFactory extends Factory
 {
@@ -20,12 +21,16 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        $title = $this->faker->sentence(4);
+
+        $rand = rand(1, 1000);
+
         return [
             'admin_id' => Admin::factory(),
-            'title' => $this->faker->sentence(4),
-            'slug' => $this->faker->slug(),
+            'title' => $title,
             'content' => $this->faker->paragraphs(3, true),
-            'image' => $this->faker->word(),
+            'image' => "https://picsum.photos/640/400?randotrand-right-imgm=$rand",
+            'slug' => Str::slug($title),
             'yt_embed' => $this->faker->word(),
             'views' => $this->faker->randomNumber(),
         ];
