@@ -23,11 +23,13 @@ class PostFactory extends Factory
     {
         $title = $this->faker->sentence(4);
 
+        $rand = rand(1, 1000);
+
         return [
             'admin_id' => Admin::factory(),
             'title' => $title,
             'content' => $this->faker->paragraphs(3, true),
-            'image' => $this->faker->word(),
+            'image' => "https://picsum.photos/640/400?randotrand-right-imgm=$rand",
             'slug' => Str::slug($title),
             'yt_embed' => $this->faker->word(),
             'views' => $this->faker->randomNumber(),

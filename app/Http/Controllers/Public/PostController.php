@@ -22,19 +22,31 @@ class PostController extends Controller
             ->take(10)
             ->get();
 
-        $latestPost = (clone $postQuery)
-            ->orderBy('id', 'desc')->take(12);
+        $latestPost = (clone $postQuery)->orderBy('id', 'desc')->take(12);
 
         $weeklyTopPosts = (clone $postQuery)
             ->where('created_at', '>=', Carbon::now()->subWeek())
             ->where('views', '>', 50)
             ->orderBy('id', 'desc')
-            ->take(12);
+            ->take(6)
+            ->get();
 
-        $categories = Category::inRandomOrder()->take(6)->get();
+        $lastWeek = now()->subDays(14)->toDateTimeString();
+        $postCond = fn ($q) => $q->limit(3)->where('created_at', '>', $lastWeek);
+        $categories = Category::whereHas('posts', $postCond)
+            ->with(['posts' => $postCond])
+            ->take(7)
+            ->orderBy('name')
+            ->get();
+
+        $trendingNow = (clone $postQuery)->where('created_at', '>=', now()->subDays(7))
+            ->where('views', '>', 50)
+            ->take(3)
+            ->get();
 
         return view('front-end.index', [
             'trendingPosts' => $trendingPosts,
+            'trendingNow' => $trendingNow,
             'latestPost' => $latestPost,
             'weeklyTopPosts' => $weeklyTopPosts,
             'categories' => $categories,
