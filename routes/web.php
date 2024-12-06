@@ -1,13 +1,14 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Public\PostController;
+use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Public\PostController as PublicPostController;
 use App\Http\Controllers\User\AuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
-Route::get('/', [PostController::class, 'index'])->name('public.index');
+Route::get('/', [PublicPostController::class, 'index'])->name('public.index');
 
 Route::prefix('admin')->group(function () {
     Auth::routes([
