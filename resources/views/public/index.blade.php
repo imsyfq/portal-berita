@@ -1,4 +1,4 @@
-@extends('front-end.layout')
+@extends('public.layout')
 
 @section('content')
     <main>
@@ -7,24 +7,24 @@
             <div class="container">
                 <div class="trending-main">
                     <!-- Trending Tittle -->
-                    @include('front-end.components.index.trending-now')
+                    @include('public.components.index.trending-now')
                     <!-- End Trending Tittle -->
 
-                    @include('front-end.components.index.trending')
+                    @include('public.components.index.trending')
                 </div>
             </div>
         </div>
         <!-- Trending Area End -->
 
         <!--   Weekly-News start -->
-        @include('front-end.components.index.weekly-news')
+        @include('public.components.index.weekly-news')
         <!-- End Weekly-News -->
 
         <!-- Whats New Start -->
         <section class="whats-news-area pt-50 pb-20">
             <div class="container">
                 <div class="row">
-                    @include('front-end.components.index.whats-new')
+                    @include('public.components.index.whats-new')
                 </div>
             </div>
         </section>

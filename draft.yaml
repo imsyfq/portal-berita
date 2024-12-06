@@ -22,6 +22,7 @@ models:
   Post:
     admin_id: id foreign
     title: string
+    slug: string unique
     content: text
     image: string
     yt_embed: string nullable

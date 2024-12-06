@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('admin_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('title');
+            $table->string('slug')->unique();
             $table->text('content');
             $table->string('image');
             $table->string('yt_embed')->nullable();

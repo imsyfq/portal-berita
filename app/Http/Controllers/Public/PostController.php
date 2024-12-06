@@ -44,7 +44,7 @@ class PostController extends Controller
             ->take(3)
             ->get();
 
-        return view('front-end.index', [
+        return view('public.index', [
             'trendingPosts' => $trendingPosts,
             'trendingNow' => $trendingNow,
             'latestPost' => $latestPost,

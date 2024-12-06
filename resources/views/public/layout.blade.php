@@ -65,11 +65,11 @@
     </div> -->
         <!-- Preloader Start -->
 
-        @include('front-end.components.header')
+        @include('public.components.header')
 
         @yield('content')
 
-       @include('front-end.components.footer')
+       @include('public.components.footer')
 
         <!-- JS here -->
 
