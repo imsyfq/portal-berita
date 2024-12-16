@@ -21,7 +21,7 @@
                                     @if ($top->categories->count() > 0)
                                         <span class="color1">{{ $top->categories->random()->name }}</span>
                                     @endif
-                                    <h4><a href="#">{{ $top->title }}</a></h4>
+                                    <h4><a href="{{ route('public.detail', $top->slug) }}">{{ $top->title }}</a></h4>
                                 </div>
                             </div>
                         @endforeach

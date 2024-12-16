@@ -13,8 +13,7 @@
                             <span>{{ $category->name }}</span>
                         @endforeach
                         <h2>
-                            {{-- todo : create the views for detial post --}}
-                            <a href="details.html">{{ $first->title }}</a>
+                            <a href="{{ route('public.detail', $first->slug) }}">{{ $first->title }}</a>
                         </h2>
                     </div>
                 </div>
@@ -35,7 +34,7 @@
                                     <span class="color1">{{ $category->name }}</span>
                                 @endforeach
                                 <h4>
-                                    <a href="details.html">{{ $post->title }}</a>
+                                    <a href="{{ route('public.detail', $post->slug) }}">{{ $post->title }}</a>
                                 </h4>
                             </div>
                         </div>
@@ -56,7 +55,7 @@
                         <span class="color{{ rand(1, 4) }}  }}">{{ $post->categories->random()->name }}</span>
                     @endif
 
-                    <h4><a href="details.html">{{ $post->title }}</a></h4>
+                    <h4><a href="{{ route('public.detail', $post->slug) }}">{{ $post->title }}</a></h4>
                 </div>
             </div>
         @endforeach

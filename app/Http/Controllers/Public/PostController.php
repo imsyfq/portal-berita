@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Cache;
 
 class PostController extends Controller
 {
@@ -50,6 +51,49 @@ class PostController extends Controller
             'latestPost' => $latestPost,
             'weeklyTopPosts' => $weeklyTopPosts,
             'categories' => $categories,
+        ]);
+    }
+
+    public function show($slug)
+    {
+        $post = Post::with('categories')
+            ->where('slug', $slug)
+            ->firstOrFail();
+
+        // make the view soon:
+        return view('public.detail', [
+            'post' => $post,
+        ]);
+    }
+
+    /**
+     * Let's define what is "views" here:
+     * "view" is when the post has been scrolled down at least 70% of total scrollHeight
+     * there is now way to validate that here, thats should be done in the front-end
+     */
+    public function addViewToPost(Request $request)
+    {
+        $request->validate([
+            'post_id' => 'required',
+            'hash' => 'required', // just a random unique code
+        ]);
+
+        // check if this post has already been viewed
+        if (Cache::has($request->hash)) {
+            return response()->json([
+                'message' => 'success',
+            ]);
+        }
+
+        $post = Post::select('id', 'views')->findOrFail($request->post_id);
+        $post->views += 1;
+        $post->save();
+
+        Cache::remember($request->hash, 120, fn () => true);
+
+        return response()->json([
+            // 'post' => $post,
+            'message' => 'success',
         ]);
     }
 }

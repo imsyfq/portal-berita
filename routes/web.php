@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Route;
 
 // Public routes
 Route::get('/', [PublicPostController::class, 'index'])->name('public.index');
+Route::prefix('post')->group(function () {
+    Route::post('/add-views', [PublicPostController::class, 'addViewToPost'])->name('public.post-view');
+    Route::get('/{slug}', [PublicPostController::class, 'show'])->name('public.detail');
+    // I believe there is another page for category list, add
+});
 
 Route::prefix('admin')->group(function () {
     Auth::routes([
