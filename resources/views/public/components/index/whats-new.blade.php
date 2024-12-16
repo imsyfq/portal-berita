@@ -43,7 +43,8 @@
                                             <div class="what-cap">
                                                 <span class="color{{ rand(1, 3) }}">{{ $cat->name }}</span>
                                                 <h4>
-                                                    <a href="#">{{ $post->title }}</a>
+                                                    <a
+                                                        href="{{ route('public.detail', $post->slug) }}">{{ $post->title }}</a>
                                                 </h4>
                                             </div>
                                         </div>

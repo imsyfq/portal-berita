@@ -7,6 +7,7 @@
     <title>@yield('title', 'Portal Berita')</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- <link rel="manifest" href="site.webmanifest" /> -->
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -25,6 +26,7 @@
     <link rel="stylesheet" href="{{ asset('/template/assets/css/slick.css') }}" />
     <link rel="stylesheet" href="{{ asset('/template/assets/css/nice-select.css') }}" />
     <link rel="stylesheet" href="{{ asset('/template/assets/css/style.css') }}" />
+    @yield('css')
     <style>
         #navigation li a {
             color: whitesmoke;
@@ -112,6 +114,8 @@
     <!-- Jquery Plugins, main Jquery -->
     <script src="{{ asset('/template/assets/js/plugins.js') }}"></script>
     <script src="{{ asset('/template/assets/js/main.js') }}"></script>
+
+    @yield('js')
 </body>
 
 </html>
