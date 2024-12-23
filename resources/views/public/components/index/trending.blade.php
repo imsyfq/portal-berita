@@ -1,5 +1,8 @@
-<div class="row">
+<div class="row mt-4">
     <div class="col-lg-8">
+        @if (request()->filled('q'))
+            <p>Menampilkan hasil pencarian untuk "{{ request('q') }}"</p>
+        @endif
         <!-- Trending Top -->
         @if ($trendingPosts->count() > 0)
             @php
@@ -45,7 +48,7 @@
     </div>
     <!-- Right content -->
     <div class="col-lg-4">
-        @foreach ($trendingPosts as $post)
+        @forelse ($trendingPosts as $post)
             <div class="trand-right-single d-flex">
                 <div class="trand-right-img" style="max-width: 120px">
                     <img src="{{ asset($post->image) }}" class="img-fluid" alt="" />
@@ -58,6 +61,9 @@
                     <h4><a href="{{ route('public.detail', $post->slug) }}">{{ $post->title }}</a></h4>
                 </div>
             </div>
-        @endforeach
+
+        @empty
+            <p>Tidak ada data untuk ditampilkan</p>
+        @endforelse
     </div>
 </div>

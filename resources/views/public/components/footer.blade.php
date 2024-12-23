@@ -8,7 +8,7 @@
                         <div class="single-footer-caption">
                             <!-- logo -->
                             <div class="footer-logo">
-                                <a href="index.html">
+                                <a href="{{ url('/') }}">
                                     <img src="{{ asset('images/banner-logo.png') }}" alt="" class="img-fluid" />
                                 </a>
                             </div>

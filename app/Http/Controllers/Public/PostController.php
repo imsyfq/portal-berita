@@ -14,6 +14,13 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $postQuery = Post::select('id', 'title', 'slug', 'image', 'created_at', 'views')
+            ->when($request->filled('q'), function ($q) use ($request) {
+                $q->where(function ($q) use ($request) {
+                    $q->where('title', 'like', "%{$request->q}%");
+                    $q->orWhere('content', 'like', "%{$request->q}%");
+                    $q->orWhereHas('categories', fn ($q) => $q->where('name', 'like', "%{$request->q}%"));
+                });
+            })
             ->with('categories');
 
         $trendingPosts = (clone $postQuery)
@@ -36,6 +43,7 @@ class PostController extends Controller
         $postCond = fn ($q) => $q->limit(3)->where('created_at', '>', $lastWeek);
         $categories = Category::whereHas('posts', $postCond)
             ->with(['posts' => $postCond])
+            ->when($request->filled('q'), fn ($q) => $q->where('name', 'like', "%{$request->q}%"))
             ->take(7)
             ->orderBy('name')
             ->get();

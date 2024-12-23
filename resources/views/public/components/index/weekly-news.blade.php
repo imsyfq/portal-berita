@@ -6,6 +6,9 @@
                 <div class="col-lg-12">
                     <div class="section-tittle mb-30">
                         <h3>Weekly Top News</h3>
+                        @if ($weeklyTopPosts->count() === 0)
+                            <p>Tidak ada data untuk ditampilkan</p>
+                        @endif
                     </div>
                 </div>
             </div>

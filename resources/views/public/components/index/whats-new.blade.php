@@ -3,6 +3,9 @@
         <div class="col-lg-3 col-md-3">
             <div class="section-tittle mb-30">
                 <h3>Whats New</h3>
+                @if ($categories->count() === 0)
+                    <p>Tidak ada data untuk ditampilkan</p>
+                @endif
             </div>
         </div>
         <div class="col-lg-9 col-md-9">

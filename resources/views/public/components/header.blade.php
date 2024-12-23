@@ -28,11 +28,8 @@
                             <!-- sticky -->
                             <div class="sticky-logo">
                                 <a href="index.html">
-                                    <img
-                                        src="{{ asset('images/banner-logo.png') }}"
-                                        class="img-fluid"
-                                        style="max-height: 80px"
-                                    />
+                                    <img src="{{ asset('images/banner-logo.png') }}" class="img-fluid"
+                                        style="max-height: 80px" />
                                 </a>
                             </div>
                             <!-- Main-menu -->
@@ -41,7 +38,7 @@
                                     <ul id="navigation">
                                         <li><a href="{{ url('/') }}">Home</a></li>
                                         <li><a href="categori.html">Category</a></li>
-                                        <li><a href="about.html">About</a></li>
+                                        <li><a href="{{ url('/about-us') }}">About</a></li>
                                         <li><a href="latest_news.html">Latest News</a></li>
                                         <li><a href="contact.html">Contact</a></li>
                                         <li>
@@ -61,8 +58,8 @@
                             <div class="header-right-btn f-right d-none d-lg-block">
                                 <i class="fas fa-search special-tag"></i>
                                 <div class="search-box">
-                                    <form action="#">
-                                        <input type="text" placeholder="Search" />
+                                    <form action="{{ route('public.index') }}">
+                                        <input type="text" placeholder="Search" name="q" />
                                     </form>
                                 </div>
                             </div>
