@@ -71,3 +71,14 @@ Make sure you have the following installed on your system:
    ```
 
 Your Laravel application should now be up and running at `http://localhost:8000`.
+
+
+### Testing Account
+
+Default admin account can be found in `database/seeders/AdminSeeder.php`.
+
+| **Login Page** | `{base}/admin/login` |
+|----------------|------------------------------|
+| **Username**   | `admin`                      |
+| **Password**   | `admin`                      |
+
