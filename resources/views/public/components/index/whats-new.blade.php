@@ -59,6 +59,10 @@
                 @endforeach
             </div>
             <!-- End Nav Card -->
+
+            @if (!$categories instanceof Illuminate\Database\Eloquent\Collection && $categories->hasPages())
+                {{ $categories->withQueryString()->links('vendor.pagination.custom') }}
+            @endif
         </div>
     </div>
 </div>

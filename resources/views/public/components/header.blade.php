@@ -37,11 +37,11 @@
                                 <nav>
                                     <ul id="navigation">
                                         <li><a href="{{ url('/') }}">Home</a></li>
-                                        <li><a href="categori.html">Category</a></li>
+                                        <li><a href="{{ route('public.category') }}">Category</a></li>
                                         <li><a href="{{ url('/about-us') }}">About</a></li>
-                                        <li><a href="latest_news.html">Latest News</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
-                                        <li>
+                                        {{-- <li><a href="latest_news.html">Latest News</a></li> --}}
+                                        {{-- <li><a href="contact.html">Contact</a></li> --}}
+                                        {{-- <li>
                                             <a href="#">Pages</a>
                                             <ul class="submenu">
                                                 <li><a href="elements.html">Element</a></li>
@@ -49,7 +49,7 @@
                                                 <li><a href="single-blog.html">Blog Details</a></li>
                                                 <li><a href="details.html">Categori Details</a></li>
                                             </ul>
-                                        </li>
+                                        </li> --}}
                                     </ul>
                                 </nav>
                             </div>
@@ -58,8 +58,9 @@
                             <div class="header-right-btn f-right d-none d-lg-block">
                                 <i class="fas fa-search special-tag"></i>
                                 <div class="search-box">
-                                    <form action="{{ route('public.index') }}">
-                                        <input type="text" placeholder="Search" name="q" />
+                                    <form action="{{ request()->url() }}">
+                                        <input type="text" placeholder="Search" name="q"
+                                            value="{{ request('q') }}" />
                                     </form>
                                 </div>
                             </div>

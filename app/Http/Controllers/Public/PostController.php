@@ -42,7 +42,10 @@ class PostController extends Controller
         $lastWeek = now()->subDays(14)->toDateTimeString();
         $postCond = fn ($q) => $q->limit(3)->where('created_at', '>', $lastWeek);
         $categories = Category::whereHas('posts', $postCond)
-            ->with(['posts' => $postCond])
+            ->with(['posts' => function ($q) use ($lastWeek) {
+                $q->select('id', 'title', 'slug', 'image');
+                $q->where('created_at', '>', $lastWeek);
+            }])
             ->when($request->filled('q'), fn ($q) => $q->where('name', 'like', "%{$request->q}%"))
             ->take(7)
             ->orderBy('name')
@@ -58,6 +61,19 @@ class PostController extends Controller
             'trendingNow' => $trendingNow,
             'latestPost' => $latestPost,
             'weeklyTopPosts' => $weeklyTopPosts,
+            'categories' => $categories,
+        ]);
+    }
+
+    public function category(Request $request)
+    {
+        $categories = Category::whereHas('posts')
+            ->with(['posts:id,title,slug,image'])
+            ->when($request->filled('q'), fn ($q) => $q->where('name', 'like', "%{$request->q}%"))
+            ->orderBy('name')
+            ->paginate(7);
+
+        return view('public.category', [
             'categories' => $categories,
         ]);
     }

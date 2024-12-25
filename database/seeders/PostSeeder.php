@@ -13,14 +13,26 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
-        Post::factory()
-            ->has(Category::factory()->count(rand(1, 4)))
-            ->count(5)->create();
+        $categories = Category::factory()->count(20)->create();
 
-        // trending post seeder
-        Post::factory(40)
-            // ->hasCategories(rand(1, 4))
-            ->has(Category::factory()->count(rand(1, 4)))
-            ->create(['views' => rand(100, 1500)]);
+        // random posts
+        Post::factory()
+            ->count(5)
+            ->create()
+            ->each(function ($post) use ($categories) {
+                $post->categories()->attach(
+                    $categories->random(rand(1, 4))->pluck('id')->toArray()
+                );
+            });
+
+        // trending post
+        Post::factory()
+            ->count(40)
+            ->create(['views' => rand(100, 1500)])
+            ->each(function ($post) use ($categories) {
+                $post->categories()->attach(
+                    $categories->random(rand(1, 4))->pluck('id')->toArray()
+                );
+            });
     }
 }
