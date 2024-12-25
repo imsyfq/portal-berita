@@ -1,5 +1,7 @@
 @extends('public.layout')
 
+@section('title', 'Semua Berita')
+
 @section('content')
     <main>
         <section class="blog_area section-padding">

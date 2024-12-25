@@ -1,5 +1,7 @@
 @extends('public.layout')
 
+@section('title', $post->title)
+
 @section('css')
     <link rel="stylesheet" href="{{ asset('template/assets/css/responsive.css') }}">
     <style>
