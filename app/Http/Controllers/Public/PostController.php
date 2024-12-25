@@ -90,6 +90,38 @@ class PostController extends Controller
         ]);
     }
 
+    public function allPost(Request $request)
+    {
+        $post = Post::select('id', 'title', 'slug', 'image', 'created_at', 'views')
+            ->when($request->filled('q'), function ($q) use ($request) {
+                $q->where(function ($q) use ($request) {
+                    $q->where('title', 'like', "%{$request->q}%");
+                    $q->orWhere('content', 'like', "%{$request->q}%");
+                    $q->orWhereHas('categories', fn ($q) => $q->where('name', 'like', "%{$request->q}%"));
+                });
+            })
+            ->when($request->filled('c_id'), function ($q) use ($request) {
+                $q->whereHas('categories', fn ($q) => $q->where('id', $request->c_id));
+            })
+            ->with('categories', 'admin')
+            ->withCount('comments as comments_count')
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+
+        $categories = Category::withCount('posts')
+            ->when($request->filled('q'), function ($q) use ($request) {
+                $q->where(function ($q) use ($request) {
+                    $q->where('name', 'like', "%{$request->q}%");
+                });
+            })
+            ->orderBy('name')->get();
+
+        return view('public.all-post', [
+            'posts' => $post,
+            'categories' => $categories,
+        ]);
+    }
+
     /**
      * Let's define what is "views" here:
      * "view" is when the post has been scrolled down at least 70% of total scrollHeight

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 // Public routes
 Route::get('/', [PublicPostController::class, 'index'])->name('public.index');
+Route::get('/posts', [PublicPostController::class, 'allPost'])->name('public.posts');
 Route::get('/categories', [PublicPostController::class, 'category'])->name('public.category');
 Route::view('/about-us', 'public.about-us');
 

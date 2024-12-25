@@ -37,9 +37,9 @@
                                 <nav>
                                     <ul id="navigation">
                                         <li><a href="{{ url('/') }}">Home</a></li>
-                                        <li><a href="{{ route('public.category') }}">Category</a></li>
-                                        <li><a href="{{ url('/about-us') }}">About</a></li>
-                                        {{-- <li><a href="latest_news.html">Latest News</a></li> --}}
+                                        <li><a href="{{ route('public.posts') }}">Semua Berita</a></li>
+                                        <li><a href="{{ route('public.category') }}">Kategori</a></li>
+                                        <li><a href="{{ url('/about-us') }}">Tentang Kami</a></li>
                                         {{-- <li><a href="contact.html">Contact</a></li> --}}
                                         {{-- <li>
                                             <a href="#">Pages</a>
